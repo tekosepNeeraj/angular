@@ -1,0 +1,46 @@
+<div class="container">
+    <form [formGroup]="registrationform" (ngSubmit)="onSubmit()">
+        <h1>Employee Registration</h1>
+        <div class="form-group">
+            <label for="">Full Name</label>
+            <input type="text" formControlName="fullname" id="" class="form-control">
+            <ng-container *ngIf="registrationform.controls['fullname'].invalid && (registrationform.controls['fullname'].touched || registrationform.controls['fullname'].dirty || submitted)">
+                <small class="text-danger" *ngIf="registrationform.controls['fullname'].hasError('required')">Fullname is required</small>
+            </ng-container>
+        </div>
+        <div class="form-group">
+            <label for="">Contact</label>
+            <input type="text" formControlName="contact" id="" class="form-control">
+            <ng-container *ngIf="registrationform.controls['contact'].invalid && (registrationform.controls['contact'].touched || registrationform.controls['contact'].dirty || submitted)">
+                <small class="text-danger" *ngIf="registrationform.controls['contact'].hasError('required')">Contact is reguired</small>
+                <small class="text-danger" *ngIf="registrationform.controls['contact'].hasError('minlength')">Contact must be Minimum 10 numbers long</small>
+                <small class="text-danger" *ngIf="registrationform.controls['contact'].hasError('maxlength')">Contact must be Maximum 10 numbers long</small>
+                <small class="text-danger" *ngIf="registrationform.controls['contact'].hasError('pattern')">Only numbers are allow ..</small>
+            </ng-container>
+        </div>
+        <div class="form-group">
+            <label for="">Email</label>
+            <input type="text" formControlName="email" id="" class="form-control">
+            <ng-container *ngIf="registrationform.controls['email'].invalid && (registrationform.controls['email'].touched || registrationform.controls['email'].dirty || submitted)">
+                <small class="text-danger" *ngIf="registrationform.controls['email'].hasError('required')">Email is required</small>
+                <small class="text-danger" *ngIf="registrationform.controls['email'].hasError('email')">Please enter a valid email</small>
+            </ng-container>
+        </div>
+        <div class="form-group">
+            <label for="designation">Designation</label>
+            <Select class="form-control" formControlName="designation">
+                <option value="">Select your Designation</option>
+                <option value="1" class="form-control">Team Lead</option>
+                <option value="2" class="form-control">Developer</option>
+                <option value="3" class="form-control">Designer</option>
+                <option value="4" class="form-control">Tester</option>
+            </Select>
+            <ng-container *ngIf="registrationform.controls['designation'].invalid && (registrationform.controls['designation'].touched || registrationform.controls['designation'].dirty || submitted)">
+                <small class="text-danger" *ngIf="registrationform.controls['designation'].hasError('required') || registrationform.controls['designation'].hasError('minlength') ">Designation filed is required</small>
+            </ng-container>
+        </div>
+
+        <button type="submit" class="btn">Register</button>
+        <p class="text-center">Already have an account click for  <a routerLink="/employee/login">Login</a></p>
+    </form>
+</div>
